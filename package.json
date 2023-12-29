@@ -1,0 +1,26 @@
+{
+  "name": "fu-tools",
+  "version": "0.0.0",
+  "description": "",
+  "type": "module",
+  "main": "src/dash.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vovchisko/fu-tools.git"
+  },
+  "author": "vovchisko",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vovchisko/fu-tools/issues"
+  },
+  "files": [
+    "src/dash"
+  ],
+  "homepage": "https://github.com/vovchisko/fu-tools#readme",
+  "devDependencies": {
+    "test-a-bit": "^1.1.1"
+  }
+}
