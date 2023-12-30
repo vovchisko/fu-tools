@@ -29,7 +29,6 @@ execute('dash - cloneDeep', async (success, fail) => {
   if (clonedMixed === mixed)
     return fail('Mixed structure was not deep cloned')
 
-
   // Checking nested structures
   if (clonedMixed.array[1] === mixed.array[1])
     return fail('Mixed structure was not deep cloned (object in array)')
