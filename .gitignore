@@ -17,3 +17,7 @@ node_modules
 *.njsproj
 *.sln
 *.sw?
+
+# AI nonsense
+/CLAUDE.md
+/.claude/

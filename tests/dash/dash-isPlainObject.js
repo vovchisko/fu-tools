@@ -18,6 +18,22 @@ execute('dash - isPlainObject', (success, fail) => {
     return fail('Expected null not to be a plain object')
   }
 
+  // Test for built-in objects (should return false)
+  if (isPlainObject(new Date())) {
+    return fail('Expected Date not to be a plain object')
+  }
+  if (isPlainObject(new RegExp('test'))) {
+    return fail('Expected RegExp not to be a plain object')
+  }
+  if (isPlainObject(new Error('test'))) {
+    return fail('Expected Error not to be a plain object')
+  }
+
+  // Test for Object.create(null) (should return true)
+  if (!isPlainObject(Object.create(null))) {
+    return fail('Expected Object.create(null) to be a plain object')
+  }
+
   // Test for non-object types
   const nonObjects = [ 42, 'string', true, undefined, Symbol('test') ]
   for (const item of nonObjects) {

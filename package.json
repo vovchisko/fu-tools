@@ -25,6 +25,7 @@
   ],
   "homepage": "https://github.com/vovchisko/fu-tools#readme",
   "devDependencies": {
+    "nodemon": "^3.1.10",
     "test-a-bit": "^1.1.1"
   }
 }

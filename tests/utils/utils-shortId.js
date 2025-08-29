@@ -1,7 +1,7 @@
 import { execute } from 'test-a-bit'
 import { shortId } from '../../src/utils.any.js'
 
-execute('util - shortId', (success, fail) => {
+execute('utils - shortId', (success, fail) => {
 
   // Test length
   const rnd1 = 2

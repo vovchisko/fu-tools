@@ -4,7 +4,23 @@ export function isPlainObject (value) {
   }
 
   const prototype = Object.getPrototypeOf(value)
-  return Object.prototype.toString.call(prototype) === '[object Object]'
+  
+  // Plain objects: {} and Object.create(null)
+  if (prototype === null || prototype === Object.prototype) {
+    return true
+  }
+
+  // Check if it's a built-in constructor (Date, RegExp, Error, etc.)
+  const constructor = prototype.constructor
+  if (constructor && constructor.name && 
+      (constructor === Date || constructor === RegExp || constructor === Error ||
+       constructor === Array || constructor === Set || constructor === Map ||
+       constructor === Promise || constructor === Function)) {
+    return false
+  }
+
+  // Custom class instances are considered plain objects
+  return true
 }
 
 export function isArray (value) {
@@ -40,7 +56,7 @@ export function isMap (value) {
 }
 
 export function isActualNumber (value) {
-  return isNumber(value) && !isNaN(value)
+  return isNumber(value) && !isNaN(value) && isFinite(value)
 }
 
 export function cloneDeep (value) {
@@ -251,4 +267,34 @@ export function pick (data, keys) {
   }
 
   return data
+}
+
+export function extend(target, ...sources) {
+  if (!target || typeof target !== 'object') {
+    throw new Error('Target must be an object')
+  }
+
+  for (const source of sources) {
+    if (!source || typeof source !== 'object') continue
+
+    for (const [key, value] of Object.entries(source)) {
+      if (isPlainObject(value)) {
+        target[key] = extend(
+          isPlainObject(target[key]) ? target[key] : {},
+          value
+        )
+      } else if (isArray(value)) {
+        target[key] = value.map(item => 
+          isPlainObject(item) ? extend({}, item) :
+          isArray(item) ? item.map(subItem => 
+            isPlainObject(subItem) ? extend({}, subItem) : subItem
+          ) : item
+        )
+      } else {
+        target[key] = value
+      }
+    }
+  }
+
+  return target
 }
