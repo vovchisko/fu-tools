@@ -5,6 +5,11 @@
   "type": "module",
   "main": "entry.node.js",
   "browser": "entry.browser.js",
+  "exports": {
+    "node": "./entry.node.js",
+    "browser": "./entry.browser.js",
+    "default": "./entry.node.js"
+  },
   "scripts": {
     "dev": "nodemon test.js",
     "test": "node test.js"
